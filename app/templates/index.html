@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+{% if buttons_first_line%}
+<table border="0" align="left"  cellpadding="5">
+    <tr>
+        {% for b_name, b_link in buttons_first_line.items() %}
+            <td style="font-size: 24px">
+                <a href="{{b_link}}">{{b_name}}</a>
+            </td>
+        {% endfor %}
+    </tr>
+</table>
+{%endif%}
+        <div id="foother">
+            {% block foother %}
+            &copy; Copyright 2017 by <a href="https://petrozavodsk.hh.ru/resume/7f1bb230ff02d459250039ed1f41626d565937">Me</a>
+            {% endblock %}
+        </div>
+{% endblock %}

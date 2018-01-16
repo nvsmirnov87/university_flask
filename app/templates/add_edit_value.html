@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page_content %}
+{% for i in forms %}
+    {{wtf.quick_form(i)}}
+{% endfor %}
+
+{% block page_content3 %}
+{% endblock %}
+
+{% endblock %}

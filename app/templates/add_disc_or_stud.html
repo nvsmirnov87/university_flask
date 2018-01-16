@@ -1,0 +1,65 @@
+{% extends "add_edit_value.html" %}
+{% block page_content3 %}
+
+<script type="text/javascript">
+    function choice_f_faculty(){
+        var tmp_id = $("#f_faculty").val();
+        console.log(tmp_id);
+        if(tmp_id == "Факультет не выбран")
+        {
+            $("#s_specialty").attr('disabled', 'disabled');
+        }
+        else
+        {
+            $("#s_specialty").removeAttr('disabled');
+            load_s_specialty();
+        }
+    }
+
+    function load_s_specialty(){
+        $.ajax({
+            type: "POST",
+            url: "/api/v1.0/form_specialties",
+            data: $('form').serialize(),
+            success: function(response) {
+                var json = jQuery.parseJSON(response)
+                obj = Object.keys(json)
+
+                $("#s_specialty")
+                    .find('option')
+                    .remove()
+                    .end()
+                    .append('<option value="Не выбрано">Не выбрано</option>')
+                    .val('0');
+
+                var value, key;
+                for(item in obj){
+                    value = json[obj[item]];
+                    //key = obj[item];
+                    key = json[obj[item]];
+                $("#s_specialty").append($("<option></option>")
+                        .attr("value",key)
+                        .text(value));
+                }
+
+            },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+    }
+
+    $(document).ready(function() {
+        console.log('123qawe!!!');
+        choice_f_faculty();
+        $("#f_faculty").change(function() {
+            choice_f_faculty();
+        });
+
+        $("#s_specialty").change(function() {
+        });
+    });
+</script>
+
+
+{% endblock %}

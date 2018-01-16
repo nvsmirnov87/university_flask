@@ -1,0 +1,38 @@
+<html>
+    <head>
+        {% if title %}
+            <title>{{title}}</title>
+        {% else %}
+            <title>Главный университет</title>
+        {% endif %}
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    </head>
+    <body>
+        <p style="font-size: 32px">
+            <b>Главный университет</b>: <a href="/index">Home</a>
+        </p>
+        <hr>
+        <div id="content">
+            <p style="font-size: 28px">
+                    {% if table_name %}
+                        {{table_name}}
+                    {% endif %}
+            </p>
+        </div>
+
+        {% block content %}
+            <div class="container">
+            {% for message in get_flashed_messages() %}
+                    <p style="font-size: 20px; color: red" font-size>{{message}}</p>
+            {% endfor %}
+            </div>
+        {% endblock %}
+
+        {% block page_content %}
+        {% endblock %}
+
+
+
+    </body>
+</html>

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block page_content %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+<a href="{{buttons['add'][1]}}">{{buttons['add'][0]}}</a>
+
+<p style="font-size: 20px">Фильтры:</p>
+{% for i in forms %}
+    {{wtf.quick_form(i)}}
+{% endfor %}
+
+{% block page_content2 %}
+{% endblock %}
+
+<table>
+    <tr>
+        <td>
+            <p style="font-size: 20px"> Результаты применения фильтров: </p>
+        </td>
+        <td align="right">
+            <p>Стр:
+            {%for page in link_pages%}
+                {% if page == '...' %}
+                    {{page}}
+                {% else %}
+                    <a href="{{link}}{{page}}">{{page}}</a>
+                {% endif %}
+            {% endfor %}
+            </p>
+        </td>
+    </tr>
+<p style="font-size: 20px">  </p>
+
+<table border="1" align="left"  cellpadding="5">
+    <tr>
+        {% for column_name in column_headers %}
+            <th align="center">
+                <p>{{column_name}}</p>
+            </th>
+        {% endfor %}
+    </tr>
+    {% for line in show_lines %}
+    <tr>
+        {% for value in line %}
+            <td>
+                <p> {{value}} <p>
+            </td>
+        {% endfor %}
+        {% if "Специальности" in table_name %}
+            <td><a href="{{buttons['edit'][1]}}/{{line[2]}}/{{line[1]}}/{{line[0]}}">{{buttons['edit'][0]}}</a></td>
+        {% elif "Дисциплины" in table_name %}
+            <td><a href="{{buttons['edit'][1]}}/{{line[0]}}/{{line[1]}}/{{line[3]}}">{{buttons['edit'][0]}}</a></td>
+        {% elif "Студенты" in table_name %}
+            <td><a href="{{buttons['profile'][1]}}/{{line[0]}}/{{line[1]}}/{{line[2]}}/{{line[3]}}/{{line[4]}}/{{line[5]}}/{{line[6]}}">{{buttons['profile'][0]}}</a></td>
+            <td><a href="{{buttons['edit'][1]}}/{{line[0]}}/{{line[1]}}/{{line[2]}}/{{line[3]}}/{{line[4]}}">{{buttons['edit'][0]}}</a></td>
+        {% elif "Оценки" in table_name %}
+            <td><a href="{{buttons['edit'][1]}}/{{line[0]}}/{{line[1]}}">{{buttons['edit'][0]}}</a></td>
+        {% else %}
+            <h1> Smt goes wronmg!!! </h1>
+        {% endif %}
+        <td><a href="{{buttons['del'][1]}}/{{line[0]}}">{{buttons['del'][0]}}</a></td>
+
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

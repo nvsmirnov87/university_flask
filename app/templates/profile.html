@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block page_content %}
+
+<table border="1">
+    <tr  style="font-size: 18px">
+        {% for (i,_) in top %}
+            <th>
+                <p>{{i}}</p>
+            </th>
+        {% endfor %}
+    </tr>
+    <tr  style="font-size: 20px">
+        {% for (_,j) in top %}
+            <th>
+                <p>{{j}}</p>
+            </th>
+        {% endfor %}
+    </tr>
+</table>
+
+<table border="1" align="left"  cellpadding="5">
+    <tr>
+        {% for column_name in column_headers %}
+            <th align="center">
+                <p>{{column_name}}</p>
+            </th>
+        {% endfor %}
+    </tr>
+    {% for line in show_lines %}
+    <tr>
+        {% for value in line %}
+            <td>
+                <p> {{value}} <p>
+            </td>
+        {% endfor %}
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}
