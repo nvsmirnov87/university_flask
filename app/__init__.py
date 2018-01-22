@@ -14,9 +14,9 @@ def create_app(config_name):
     bootstrap.init_app(app)
 
     # Зарегистрировали макеты
-    from main import main
+    from .main import main
     app.register_blueprint(main)
-    from api_1_0 import api
+    from .api_1_0 import api
     app.register_blueprint(api, url_prefix='/api/v1.0')
 
     return app
