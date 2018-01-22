@@ -15,12 +15,13 @@ templates -> HTML-шаблоны + JS.
 
 
 Чтобы запустить приложение:
-﻿1.Настраиваем ОС для поддержки виртуальных окружений. 
-Ставим виртуальное окружение. В основной директории проекта в терминале выполняем:
+﻿1. Настраиваем ОС для поддержки виртуальных окружений. 
+
+Ставим виртуальное окружение: 
 mkvirtualenv --no-site-packages --python=/usr/bin/python2.7 venv
 
-Ставим доп пакеты:
-venv/bin/pip install -r requirements.txt
+С виртуального окружения ставим доп. пакеты из главной директории проекта:
+pip install -r requirements.txt
 
 2. Создаем БД и пользователя:
 sudo -u postgres psql
@@ -28,16 +29,14 @@ postgres=# CREATE DATABASE university_db;
 postgres=# CREATE USER admin WITH password 'admin';
 postgres=# GRANT ALL privileges ON DATABASE university_db TO admin;
 
-3.Запускаем скрипты из папки Scripts.
+3. Запускаем скрипты из папки Scripts.
 В БД создаем таблицы:
 psql -h localhost -U admin -d university_db -f "create_tables.sql"
 и заполняем их данными (займет 1-2 мин):
 psql -h localhost -U admin -d university_db -f "insert_data_in_tables.sql"
 
-4. Сделать manage.py исполняемым:
-chmod a+x manage.py
-Из виртульного окружения запускаем проект: 
-./manage.py runserver
+4. Запускаем приложение с интерпритатором виртуального окржуения из главной директории проекта:
+python manage.py runserver
 
 5. В браузере переходим по адресу: localhost:5000
 
